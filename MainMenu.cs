@@ -3,10 +3,13 @@
 public class MainMenu
 {
     private static bool isRunning = true;
+    private static Player? player;
+    private static CancellationTokenSource? statTokenSource;
 
     public static void MainMenuRun()
     {
         ShowHowToPlay();
+        StartStatTickLoop();
         while (isRunning)
         {
             ShowMainMenu();
@@ -42,6 +45,7 @@ public class MainMenu
         switch (input)
         {
             case "1":
+                ChooseStarterPet();
                 StartNewGame();
                 break;
             case "2":
@@ -64,6 +68,31 @@ public class MainMenu
 
     }
 
+    private static void ChooseStarterPet() 
+    {
+        Console.WriteLine("Choose your starter:");
+        Console.WriteLine("1. Cat (2x Money)");
+        Console.WriteLine("2. Monkey (Faster Item Use)");
+        Console.WriteLine("3. Rabbit (Slower Stat Decay)");
+
+        string input = Console.ReadLine();
+
+        StarterType starterType = input switch
+        {
+            "1" => StarterType.Cat,
+            "2" => StarterType.Monkey,
+            "3" => StarterType.Rabbit,
+            _ => StarterType.Cat
+        };
+
+        player = new Player(starterType);
+
+        
+        PetSpecies starterSpecies = (PetSpecies)Enum.Parse(typeof(PetSpecies), starterType.ToString());
+        Pet starterPet = new Pet("Starter", starterSpecies);
+        PetManager.AdoptPet(starterPet);
+        
+    }
 
     private static void StartNewGame()
     {
@@ -114,13 +143,29 @@ public class MainMenu
         Console.Clear();
         Console.WriteLine("=== Credits ===");
         Console.WriteLine("Created by Ege Mert Karslı - 225040053");
-        Console.WriteLine("Press any key to return...");
         Console.WriteLine("Honorable Mention: \nChatGPT \nFellas in Reddit \nIndian Youtubers");
+        Console.WriteLine("Press any key to return...");
         Console.ReadKey();
     }
 
 
+    private static void StartStatTickLoop()
+    {
+        statTokenSource = new CancellationTokenSource();
+        var token = statTokenSource.Token;
 
+        Task.Run(async () =>
+        {
+            while (!token.IsCancellationRequested)
+            {
+                await Task.Delay(3000);
+                if (player != null)
+                {
+                    PetManager.TickStats(player);
+                }
+            }
+        }, token);
+    }
 
 }
 
