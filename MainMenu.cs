@@ -98,43 +98,48 @@ public class MainMenu
     {
         bool inGame = true;
 
-        Console.Clear();
-        Console.WriteLine("=== Game Menu ===");
-        Console.WriteLine("1. Use Item");
-        Console.WriteLine("2. Feed Animals");
-        Console.WriteLine("3. Adopt Animal");
-        Console.WriteLine("4. Show All Stats");
-        Console.WriteLine("5. Return to Main Menu");
-        Console.Write("Choose an action: ");
-        string input = Console.ReadLine();
+        while (inGame)
+        {
+            Console.Clear();
+            Console.WriteLine("=== Game Menu ===");
+            Console.WriteLine("1. Use Item");
+            Console.WriteLine("2. Feed Animals");
+            Console.WriteLine("3. Adopt Animal");
+            Console.WriteLine("4. Show Stats");
+            Console.WriteLine("5. Return to Main Menu");
+            Console.Write("Choose an action: ");
+            string input = Console.ReadLine();
 
-        switch (input)
-        { 
-        case "1":
-            Console.WriteLine("I will add.");
-            Console.ReadKey();
-            break;
-        case "2":
-            Console.WriteLine("Feed Animals not implemented yet.");
-            Console.ReadKey();
-            break;
-        case "3":
-            Console.Write("Enter name for new pet: ");
-            string newPet = Console.ReadLine();
-            
-            break;
-        case "4":
-            //PetManager.ShowAllStats(); not added yet
-            break;
-        case "5":
-            inGame = false;
-            //PetManager.StopStatDecrease(); not added yet
-            break;
-        default:
-            Console.WriteLine("Invalid option.");
-            Console.ReadKey();
-            break;
+            switch (input)
+            {
+                case "1":
+                    Console.WriteLine("I will add.");
+                    Console.ReadKey();
+                    break;
+                case "2":
+                    Console.WriteLine("Feed Animals not implemented yet.");
+                    Console.ReadKey();
+                    break;
+                case "3":
+                    Console.Write("Enter name for new pet: ");
+                    string newPet = Console.ReadLine();
+
+                    break;
+                case "4":
+                    PetManager.ShowAllPets(); 
+                    break;
+                case "5":
+                    inGame = false;
+                    //PetManager.StopStatDecrease(); not added yet
+                    break;
+                default:
+                    Console.WriteLine("Invalid option.");
+                    Console.ReadKey();
+                    break;
+            }
         }
+
+        
 
     }
 
@@ -166,6 +171,8 @@ public class MainMenu
             }
         }, token);
     }
+
+   
 
 }
 

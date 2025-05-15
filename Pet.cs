@@ -24,7 +24,7 @@ public class Pet
 
     public void ShowStats()
     {
-        Console.WriteLine($"{Name} the {Species} | Hunger: {Hunger}, Sleep: {Sleep}, Fun: {Happiness}");
+        Console.WriteLine($"{Name} the {Species} | \nHunger: {Hunger}, \nSleep: {Sleep}, \nFun: {Happiness}");
     }
 
     public bool IsAlive => Hunger > 0 && Sleep > 0 && Happiness > 0;
