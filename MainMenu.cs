@@ -9,7 +9,10 @@ public class MainMenu
     public static void MainMenuRun()
     {
         ShowHowToPlay();
-        StartStatTickLoop();
+        
+        
+
+   
         while (isRunning)
         {
             ShowMainMenu();
@@ -45,8 +48,9 @@ public class MainMenu
         switch (input)
         {
             case "1":
-                ChooseStarterPet();
                 StartNewGame();
+                ChooseStarterPet();
+                StartStatTickLoop();
                 break;
             case "2":
                 Console.WriteLine("Load Game not implemented yet.");
@@ -98,9 +102,25 @@ public class MainMenu
     {
         bool inGame = true;
 
+        statTokenSource = new CancellationTokenSource();
+        var token = statTokenSource.Token;
+
+        StartStatTickLoop(); // Starts ticking stats in the background
+        PetManager.ClearPets();
+        
+        ShowInGameMenu();
+
+       
+    }
+
+    private static  void ShowInGameMenu() 
+    {
+        bool inGame = true;
+
         while (inGame)
         {
             Console.Clear();
+
             Console.WriteLine("=== Game Menu ===");
             Console.WriteLine("1. Use Item");
             Console.WriteLine("2. Feed Animals");
@@ -108,38 +128,57 @@ public class MainMenu
             Console.WriteLine("4. Show Stats");
             Console.WriteLine("5. Return to Main Menu");
             Console.Write("Choose an action: ");
+
             string input = Console.ReadLine();
 
             switch (input)
             {
                 case "1":
-                    Console.WriteLine("I will add.");
+                    Console.WriteLine("Use Item not implemented yet.");
                     Console.ReadKey();
                     break;
+
                 case "2":
                     Console.WriteLine("Feed Animals not implemented yet.");
                     Console.ReadKey();
                     break;
+
                 case "3":
                     Console.Write("Enter name for new pet: ");
                     string newPet = Console.ReadLine();
 
+                    Console.Write("Enter species (Cat, Monkey, Rabbit, Fox): ");
+                    string speciesInput = Console.ReadLine();
+
+                    if (Enum.TryParse<PetSpecies>(speciesInput, true, out PetSpecies species))
+                    {
+                        PetManager.AdoptPet(new Pet(newPet, species));
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid species. Please try again.");
+                    }
+
+                    Console.ReadKey();
                     break;
+
                 case "4":
-                    PetManager.ShowAllPets(); 
+                    PetManager.ShowAllPets();
+                    Console.ReadKey();
                     break;
+
                 case "5":
                     inGame = false;
-                    //PetManager.StopStatDecrease(); not added yet
+                    statTokenSource.Cancel();
                     break;
+
                 default:
-                    Console.WriteLine("Invalid option.");
+                    Console.WriteLine("Invalid input.");
                     Console.ReadKey();
                     break;
             }
         }
 
-        
 
     }
 
@@ -163,7 +202,7 @@ public class MainMenu
         {
             while (!token.IsCancellationRequested)
             {
-                await Task.Delay(3000);
+                await Task.Delay(2000);
                 if (player != null)
                 {
                     PetManager.TickStats(player);
@@ -172,7 +211,7 @@ public class MainMenu
         }, token);
     }
 
-   
+    
 
 }
 

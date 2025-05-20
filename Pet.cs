@@ -29,4 +29,7 @@ public class Pet
 
     public bool IsAlive => Hunger > 0 && Sleep > 0 && Happiness > 0;
 
+    
+
+
 }

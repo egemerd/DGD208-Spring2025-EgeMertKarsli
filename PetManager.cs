@@ -14,27 +14,34 @@ public class PetManager
 
     public static void ShowAllPets()
     {
-        Console.Clear();
+        
         Console.WriteLine("=== All Pets ===");
         foreach (var pet in pets)
         {
             pet.ShowStats();
         }
-        Console.WriteLine("Press any key to continue...");
-        Console.ReadKey();
+        
     }
 
     public static void TickStats(Player player)
     {
-        int decay = player.ApplyStatDecay(1);
+        int decay = player.ApplyStatDecay(2);
         foreach (var pet in pets)
         {
             pet.DecreaseStats(decay);
         }
     }
 
+    public static void ClearPets()
+    {
+        pets.Clear();
+        
+    }
+
+    
+
     public static List<Pet> GetPets() => pets;
 
-
+    
 
 }
