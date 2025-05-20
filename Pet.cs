@@ -2,12 +2,11 @@
 
 public class Pet
 {
-    public string Name { get; private set; }
-    public PetSpecies Species { get; private set; }
-
-    public int Sleep { get; set; } = 50;
-	public int Happiness { get; set; } = 50;
-    public int Hunger { get; set; } = 50;
+    public string Name { get; set; } = "";
+    public PetSpecies Species { get; set; }
+    public int Hunger { get; set; }
+    public int Sleep { get; set; }
+    public int Happiness { get; set; }
 
     public Pet() { }
 
@@ -15,6 +14,9 @@ public class Pet
     {
         Name = name;
         Species = species;
+        Hunger = 50;
+        Sleep = 50;
+        Happiness = 50;
     }
 
     public void DecreaseStats(int decay)
@@ -26,7 +28,7 @@ public class Pet
 
     public void ShowStats()
     {
-        Console.WriteLine($"{Name} the {Species} | \nHunger: {Hunger}, \nSleep: {Sleep}, \nFun: {Happiness}");
+        Console.WriteLine($"{Name} the {Species} | Hunger: {Hunger}, Sleep: {Sleep}, Fun: {Happiness}");
     }
 
     public bool IsAlive => Hunger > 0 && Sleep > 0 && Happiness > 0;

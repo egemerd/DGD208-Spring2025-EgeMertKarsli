@@ -110,7 +110,7 @@ public class MainMenu
         var token = statTokenSource.Token;
         
         
-        StartStatTickLoop(); // Starts ticking stats in the background
+        StartStatTickLoop(); 
         
         
         ShowInGameMenu();
@@ -153,7 +153,7 @@ public class MainMenu
                     Console.Write("Enter name for new pet: ");
                     string newPet = Console.ReadLine();
 
-                    Console.Write("Enter species (Cat, Monkey, Rabbit, Fox): ");
+                    Console.Write("Enter species (Dog, Horse, Coala, Panda, Fox): ");
                     string speciesInput = Console.ReadLine();
 
                     if (Enum.TryParse<PetSpecies>(speciesInput, true, out PetSpecies species))
