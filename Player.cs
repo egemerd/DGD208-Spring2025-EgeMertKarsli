@@ -3,6 +3,7 @@
 public class Player
 {
     public StarterType StarterBonus { get; private set; }
+    public Player() { }
 
     public Player(StarterType starterBonus)
     {

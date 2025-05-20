@@ -9,6 +9,8 @@ public class Pet
 	public int Happiness { get; set; } = 50;
     public int Hunger { get; set; } = 50;
 
+    public Pet() { }
+
     public Pet(string name, PetSpecies species)
     {
         Name = name;

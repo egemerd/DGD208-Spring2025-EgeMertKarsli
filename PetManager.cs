@@ -1,9 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json;
 
 public class PetManager
 {
 	private static List<Pet> pets = new List<Pet>();
+
+    public static void SaveGame(Player player)
+    {
+        var data = new GameData
+        {
+            Player = player,
+            Pets = pets
+        };
+
+        string json = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText("save.json", json);
+        Console.WriteLine("Game saved.");
+    }
+
+    public static Player? LoadGame()
+    {
+        if (!File.Exists("save.json"))
+        {
+            Console.WriteLine("No save file found.");
+            return null;
+        }
+
+        string json = File.ReadAllText("save.json");
+        GameData data = JsonSerializer.Deserialize<GameData>(json);
+
+        pets = data.Pets;
+        Console.WriteLine("Game loaded.");
+        return data.Player;
+    }
+
 
     public static void AdoptPet(Pet pet)
     {

@@ -48,14 +48,18 @@ public class MainMenu
         switch (input)
         {
             case "1":
-                StartNewGame();
+                PetManager.ClearPets();
                 ChooseStarterPet();
-                StartStatTickLoop();
+                StartGame();
                 break;
             case "2":
-                Console.WriteLine("Load Game not implemented yet.");
-                Console.ReadKey();
+                player = PetManager.LoadGame();
+                if (player != null)
+                    StartGame();
+                else
+                    Console.ReadKey();
                 break;
+            
             case "3":
                 ShowCredits();
                 break;
@@ -98,22 +102,23 @@ public class MainMenu
         
     }
 
-    private static void StartNewGame()
+    private static void StartGame()
     {
-        bool inGame = true;
+        
 
         statTokenSource = new CancellationTokenSource();
         var token = statTokenSource.Token;
-
+        
+        
         StartStatTickLoop(); // Starts ticking stats in the background
-        PetManager.ClearPets();
+        
         
         ShowInGameMenu();
 
        
     }
 
-    private static  void ShowInGameMenu() 
+    private static void ShowInGameMenu() 
     {
         bool inGame = true;
 
@@ -126,7 +131,8 @@ public class MainMenu
             Console.WriteLine("2. Feed Animals");
             Console.WriteLine("3. Adopt Animal");
             Console.WriteLine("4. Show Stats");
-            Console.WriteLine("5. Return to Main Menu");
+            Console.WriteLine("5. Save Game");
+            Console.WriteLine("6. Return to Main Menu");
             Console.Write("Choose an action: ");
 
             string input = Console.ReadLine();
@@ -159,17 +165,23 @@ public class MainMenu
                         Console.WriteLine("Invalid species. Please try again.");
                     }
 
-                    Console.ReadKey();
+                    
                     break;
 
                 case "4":
                     PetManager.ShowAllPets();
                     Console.ReadKey();
                     break;
-
                 case "5":
+                    PetManager.SaveGame(player);
+                    Console.WriteLine("Game Saved.");
+                    Console.ReadKey();
+                    break;
+
+                case "6":
                     inGame = false;
                     statTokenSource.Cancel();
+                    
                     break;
 
                 default:
