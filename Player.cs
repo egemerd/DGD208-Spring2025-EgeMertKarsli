@@ -3,6 +3,7 @@
 public class Player
 {
     public StarterType StarterBonus { get; private set; }
+    public int Money { get; set; } = 0;
     public Player() { }
 
     public Player(StarterType starterBonus)
@@ -23,5 +24,17 @@ public class Player
     public int ApplyStatDecay(int baseDecay)
     {
         return StarterBonus == StarterType.Rabbit ? baseDecay / 2 : baseDecay;
+    }
+
+    public void ShowMoney() 
+    {
+        Console.WriteLine($"Money: {Money}");  
+    }
+
+    public void AddMoney(int amount) 
+    {
+        int finalAmount = ApplyMoneyBonus(amount);
+        Money += finalAmount;
+        
     }
 }

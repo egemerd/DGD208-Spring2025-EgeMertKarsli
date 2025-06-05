@@ -111,7 +111,7 @@ public class MainMenu
         
         
         StartStatTickLoop(); 
-        
+        StartMoneyTickLoop();
         
         ShowInGameMenu();
 
@@ -170,6 +170,7 @@ public class MainMenu
 
                 case "4":
                     PetManager.ShowAllPets();
+                    player.ShowMoney();
                     Console.ReadKey();
                     break;
                 case "5":
@@ -223,7 +224,21 @@ public class MainMenu
         }, token);
     }
 
-    
+    private static void StartMoneyTickLoop()
+    {
+        Task.Run(async () =>
+        {
+            while (!statTokenSource.Token.IsCancellationRequested)
+            {
+                await Task.Delay(2000); 
+                if (player != null)
+                {
+                    player.AddMoney(1); 
+                }
+            }
+        }, statTokenSource.Token);
+    }
+
 
 }
 

@@ -52,6 +52,7 @@ public class PetManager
             pet.ShowStats();
         }
         
+        
     }
 
     public static void TickStats(Player player)
@@ -70,7 +71,10 @@ public class PetManager
     }
 
     
-
+    public static void GiveMoney() 
+    {
+        
+    }
     public static List<Pet> GetPets() => pets;
 
     
