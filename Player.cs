@@ -6,6 +6,9 @@ public class Player
     public int Money { get; set; } = 0;
     public Player() { }
 
+    public List<Item> Inventory { get; } = new List<Item>();
+
+
     public Player(StarterType starterBonus)
     {
         StarterBonus = starterBonus;
@@ -37,4 +40,21 @@ public class Player
         Money += finalAmount;
         
     }
+
+    public void ShowInventory()
+    {
+        Console.WriteLine("=== Inventory ===");
+        if (Inventory.Count == 0)
+        {
+            Console.WriteLine("No items.");
+            return;
+        }
+
+        for (int i = 0; i < Inventory.Count; i++)
+        {
+            var item = Inventory[i];
+            Console.WriteLine($"{i + 1}. {item.Name} - {item.Description}");
+        }
+    }
+
 }

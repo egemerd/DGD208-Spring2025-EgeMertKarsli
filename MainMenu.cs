@@ -131,8 +131,9 @@ public class MainMenu
             Console.WriteLine("2. Feed Animals");
             Console.WriteLine("3. Adopt Animal");
             Console.WriteLine("4. Show Stats");
-            Console.WriteLine("5. Save Game");
-            Console.WriteLine("6. Return to Main Menu");
+            Console.WriteLine("5. Show Shop");
+            Console.WriteLine("6. Save Game");
+            Console.WriteLine("7. Return to Main Menu");
             Console.Write("Choose an action: ");
 
             string input = Console.ReadLine();
@@ -140,7 +141,7 @@ public class MainMenu
             switch (input)
             {
                 case "1":
-                    Console.WriteLine("Use Item not implemented yet.");
+                    UseItem();
                     Console.ReadKey();
                     break;
 
@@ -174,12 +175,16 @@ public class MainMenu
                     Console.ReadKey();
                     break;
                 case "5":
+                    Shop.ShowShop(player);
+                    Console.ReadKey();
+                    break;
+                case "6":
                     PetManager.SaveGame(player);
                     Console.WriteLine("Game Saved.");
                     Console.ReadKey();
                     break;
 
-                case "6":
+                case "7":
                     inGame = false;
                     statTokenSource.Cancel();
                     
@@ -239,7 +244,35 @@ public class MainMenu
         }, statTokenSource.Token);
     }
 
+    private static void UseItem()
+    {
+        player.ShowInventory();
+        if (player.Inventory.Count == 0) return;
 
+        Console.Write("Choose item number to use: ");
+        if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= player.Inventory.Count)
+        {
+            var item = player.Inventory[index - 1];
+
+            var pets = PetManager.GetPets();
+            if (pets.Count == 0)
+            {
+                Console.WriteLine("You have no pets.");
+                return;
+            }
+
+            Console.WriteLine("Choose a pet to use item on:");
+            for (int i = 0; i < pets.Count; i++)
+                Console.WriteLine($"{i + 1}. {pets[i].Name}");
+
+            if (int.TryParse(Console.ReadLine(), out int petIndex) && petIndex > 0 && petIndex <= pets.Count)
+            {
+                var pet = pets[petIndex - 1];
+                item.UseAsync(pet);
+                player.Inventory.Remove(item);
+            }
+        }
+    }
 }
 
 
