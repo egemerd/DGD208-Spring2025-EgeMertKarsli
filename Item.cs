@@ -1,29 +1,32 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 public class Item
 {
-    public string Name { get; }
-    public string Description { get; }
-    public int Cost { get; }
-
-    public int HungerEffectPerTick { get; }
-    public int SleepEffectPerTick { get; }
-    public int HappinessEffectPerTick { get; }
-
-    public int DurationInSeconds { get; }
+    public string Name { get; set; }
+    public string Description { get; set; }
+    public int Cost { get; set; }
 
     
+    public int Hunger { get; set; }
+    public int Sleep { get; set; }
+    public int Happiness { get; set; }
 
+    public int Duration { get; set; }
+
+    public Item() { }
+
+    
     public async Task UseAsync(Pet pet)
     {
-        Console.WriteLine($"{Name} is now being used on {pet.Name} for {DurationInSeconds} seconds.");
+        Console.WriteLine($"{Name} is now being used on {pet.Name} for {Duration} seconds.");
 
-        for (int i = 0; i < DurationInSeconds; i++)
+        for (int i = 0; i < Duration; i++)
         {
-            await Task.Delay(1000); 
-            pet.Hunger += HungerEffectPerTick;
-            pet.Sleep += SleepEffectPerTick;
-            pet.Happiness += HappinessEffectPerTick;
+            await Task.Delay(1000);
+            pet.Hunger += Hunger;
+            pet.Sleep += Sleep;
+            pet.Happiness += Happiness;
 
             Console.WriteLine($"Tick {i + 1}: Applied effects to {pet.Name}.");
         }

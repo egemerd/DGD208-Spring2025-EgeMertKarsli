@@ -6,7 +6,9 @@ public class Player
     public int Money { get; set; } = 0;
     public Player() { }
 
-    public List<Item> Inventory { get; } = new List<Item>();
+    public List<Item> Inventory { get; set; } = new List<Item>();
+
+
 
 
     public Player(StarterType starterBonus)
