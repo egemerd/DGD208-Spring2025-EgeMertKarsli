@@ -2,12 +2,8 @@
 
 public static class Shop
 {
-    public static List<Item> AvailableItems = new List<Item>
-    {
-        new Item("Food", "Restores hunger", 10, +20, 0, 0,2),
-        new Item("Toy", "Increases happiness", 15, 0, 0, +30,3),
-        new Item("Bed", "Improves sleep", 20, 0, +25, 0,4)
-    };
+    public static List<Item> AvailableItems = ItemDatabase.ItemList;
+    
 
     public static void ShowShop(Player player)
     {

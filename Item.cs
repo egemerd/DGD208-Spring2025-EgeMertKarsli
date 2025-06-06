@@ -12,16 +12,7 @@ public class Item
 
     public int DurationInSeconds { get; }
 
-    public Item(string name, string description, int cost, int hungerPerTick, int sleepPerTick, int happinessPerTick, int durationInSeconds)
-    {
-        Name = name;
-        Description = description;
-        Cost = cost;
-        HungerEffectPerTick = hungerPerTick;
-        SleepEffectPerTick = sleepPerTick;
-        HappinessEffectPerTick = happinessPerTick;
-        DurationInSeconds = durationInSeconds;
-    }
+    
 
     public async Task UseAsync(Pet pet)
     {
