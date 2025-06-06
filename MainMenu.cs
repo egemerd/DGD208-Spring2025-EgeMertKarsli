@@ -146,7 +146,7 @@ public class MainMenu
                     break;
 
                 case "2":
-                    Console.WriteLine("Feed Animals not implemented yet.");
+                    Food.FeedPetMenu();
                     Console.ReadKey();
                     break;
 
@@ -272,7 +272,12 @@ public class MainMenu
                 player.Inventory.Remove(item);
             }
         }
+
+
     }
+
+    
+
 }
 
 
