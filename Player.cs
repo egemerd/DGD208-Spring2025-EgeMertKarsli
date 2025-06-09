@@ -3,7 +3,7 @@
 public class Player
 {
     public StarterType StarterBonus { get; private set; }
-    public int Money { get; set; } = 0;
+    public int Money { get; set; } = 50;
     public Player() { }
 
     public List<Item> Inventory { get; set; } = new List<Item>();

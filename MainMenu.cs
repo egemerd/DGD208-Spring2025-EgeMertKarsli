@@ -25,11 +25,15 @@ public class MainMenu
         Console.Clear();
         Console.WriteLine("=== How to Play ===");
         Console.WriteLine("- Adopt and care for pets.");
-        Console.WriteLine("- Pet stats drop every 3 seconds.");
+        Console.WriteLine("- Pet stats drop every 2 seconds.");
         Console.WriteLine("- Use items or feed them to keep them alive.");
+        Console.WriteLine("- You have 50 money.");
+        Console.WriteLine("- Choose your starter pet wisely.");
         Console.WriteLine("=== How to Play ===");
+        Console.WriteLine("- Have Fun.");
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
+        
     }
 
     private static void ShowMainMenu()
