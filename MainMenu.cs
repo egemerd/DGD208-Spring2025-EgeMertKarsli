@@ -268,7 +268,7 @@ public class MainMenu
             if (int.TryParse(Console.ReadLine(), out int petIndex) && petIndex > 0 && petIndex <= pets.Count)
             {
                 var pet = pets[petIndex - 1];
-                item.UseAsync(pet);
+                item.UseAsync(pet,player);
                 player.Inventory.Remove(item);
             }
         }

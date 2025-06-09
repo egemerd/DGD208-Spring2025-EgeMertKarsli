@@ -12,16 +12,19 @@ public class Item
     public int Sleep { get; set; }
     public int Happiness { get; set; }
 
+    public string Rareness { get; set; }
+
     public int Duration { get; set; }
 
     public Item() { }
 
-    
-    public async Task UseAsync(Pet pet)
-    {
-        Console.WriteLine($"{Name} is now being used on {pet.Name} for {Duration} seconds.");
 
-        for (int i = 0; i < Duration; i++)
+    public async Task UseAsync(Pet pet, Player player)
+    {
+        int adjustedDuration = player.ApplyItemDuration(Duration);
+        Console.WriteLine($"{Name} is now being used on {pet.Name} for {adjustedDuration} seconds.");
+
+        for (int i = 0; i < adjustedDuration; i++)
         {
             await Task.Delay(1000);
             pet.Hunger += Hunger;

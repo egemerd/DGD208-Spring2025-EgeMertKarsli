@@ -10,6 +10,8 @@ public class Pet
 
     public Pet() { }
 
+    public event Action<Pet> OnPetExpired;
+
     public Pet(string name, PetSpecies species)
     {
         Name = name;
@@ -24,6 +26,12 @@ public class Pet
         Hunger = Math.Max(Hunger - decay, 0);
         Sleep = Math.Max(Sleep - decay, 0);
         Happiness = Math.Max(Happiness - decay, 0);
+
+        if (Hunger == 0 && Sleep == 0 && Happiness == 0)
+        {
+            OnPetExpired?.Invoke(this);
+        }
+
     }
 
     public void ShowStats()

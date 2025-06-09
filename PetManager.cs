@@ -30,6 +30,11 @@ public class PetManager
         string json = File.ReadAllText("save.json");
         GameData data = JsonSerializer.Deserialize<GameData>(json);
 
+        foreach (var pet in pets)
+        {
+            pet.OnPetExpired += HandlePetExpired;
+        }
+
         pets = data.Pets;
         Console.WriteLine("Game loaded.");
         return data.Player;
@@ -39,8 +44,17 @@ public class PetManager
     public static void AdoptPet(Pet pet)
     {
         pets.Add(pet);
+        pet.OnPetExpired += HandlePetExpired;
+
         Console.WriteLine($"{pet.Name} the {pet.Species} has been adopted!");
         Console.ReadKey();
+    }
+
+    private static void HandlePetExpired(Pet pet)
+    {
+        pets.Remove(pet);
+        Console.Write($"{pet.Name} the {pet.Species} has been removed due to all stats reaching zero.");
+        Console.ReadKey(); 
     }
 
     public static void ShowAllPets()

@@ -9,10 +9,11 @@ public static class Shop
         {
             Name = "Food",
             Description = "Restores hunger",
-            Cost = 1,
+            Cost = 10,
             Hunger = 20,
             Sleep = 0,
             Happiness = 0,
+            Rareness = "Uncommon",
             Duration = 2
         },
         new Item
@@ -23,16 +24,18 @@ public static class Shop
             Hunger = 0,
             Sleep = 0,
             Happiness = 30,
+            Rareness = "Uncommon",
             Duration = 3
         },
         new Item
         {
             Name = "Bed",
             Description = "Improves sleep",
-            Cost = 20,
+            Cost = 1,
             Hunger = 0,
             Sleep = 25,
             Happiness = 0,
+            Rareness = "Uncommon",
             Duration = 4
         }
     };
@@ -47,7 +50,7 @@ public static class Shop
         for (int i = 0; i < AvailableItems.Count; i++)
         {
             var item = AvailableItems[i];
-            Console.WriteLine($"{i + 1}. {item.Name} - {item.Description} - ${item.Cost}");
+            Console.WriteLine($"{i + 1}. {item.Name} - {item.Description} - {item.Rareness}- ${item.Cost}");
         }
         Console.Write("Select item to buy or 0 to go back: ");
         string input = Console.ReadLine();
