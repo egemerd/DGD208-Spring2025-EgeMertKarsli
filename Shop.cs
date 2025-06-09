@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public static class Shop
 {
@@ -151,22 +152,18 @@ public static class Shop
         }
 
     };
-}
 
-
-
-
-public static void ShowShop(Player player)
+    public static void ShowShop(Player player)
     {
         Console.Clear();
-        Console.WriteLine("Hello")
-        Console.WriteLine($"{AvaliableItems.Count}")
         Console.WriteLine("=== Shop ===");
         for (int i = 0; i < AvailableItems.Count; i++)
         {
             var item = AvailableItems[i];
-            Console.WriteLine($"{i + 1}. {item.Name} - {item.Description} - {item.Rareness}- ${item.Cost}");
+            Console.WriteLine($"{i + 1}. {item.Name} - {item.Description} - {item.Rareness} - ${item.Cost}");
+            Console.WriteLine($"    Effects: Hunger +{item.Hunger}, Sleep +{item.Sleep}, Happiness +{item.Happiness}, Duration: {item.Duration} turns");
         }
+
         Console.Write("Select item to buy or 0 to go back: ");
         string input = Console.ReadLine();
         if (int.TryParse(input, out int choice) && choice > 0 && choice <= AvailableItems.Count)
@@ -174,7 +171,6 @@ public static void ShowShop(Player player)
             var item = AvailableItems[choice - 1];
             if (player.Money >= item.Cost)
             {
-                
                 player.Money -= item.Cost;
                 player.Inventory.Add(item);
                 Console.WriteLine($"Bought {item.Name}.");
@@ -185,5 +181,14 @@ public static void ShowShop(Player player)
             }
         }
     }
+
 }
+
+
+
+
+
+
+
+
 
