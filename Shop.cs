@@ -2,15 +2,14 @@
 
 public static class Shop
 {
-    public static List<Item> AvailableItems = new List<Item> 
-    
+    public static List<Item> AvailableItems = new List<Item>
     {
         new Item
         {
-            Name = "Food",
+            Name = "Treat",
             Description = "Restores hunger",
-            Cost = 10,
-            Hunger = 20,
+            Cost = 5,
+            Hunger = 10,
             Sleep = 0,
             Happiness = 0,
             Rareness = "Uncommon",
@@ -23,7 +22,7 @@ public static class Shop
             Cost = 15,
             Hunger = 0,
             Sleep = 0,
-            Happiness = 30,
+            Happiness = 20,
             Rareness = "Uncommon",
             Duration = 3
         },
@@ -31,21 +30,137 @@ public static class Shop
         {
             Name = "Bed",
             Description = "Improves sleep",
-            Cost = 1,
+            Cost = 10,
             Hunger = 0,
             Sleep = 25,
             Happiness = 0,
             Rareness = "Uncommon",
-            Duration = 4
-        }
-    };
-    
+            Duration = 3
+        },
+        new Item
+        {
+            Name = "Blanket",
+            Description = "Helps your pet rest better",
+            Cost = 12,
+            Hunger = 0,
+            Sleep = 20,
+            Happiness = 5,
+            Rareness = "Common",
+            Duration = 2
+        },
+        new Item
+        {
+            Name = "Snack Bar",
+            Description = "Quick snack to ease hunger slightly",
+            Cost = 3,
+            Hunger = 5,
+            Sleep = 0,
+            Happiness = 0,
+            Rareness = "Common",
+            Duration = 1
+        },
 
-    
-    
-    public static void ShowShop(Player player)
+
+        new Item
+        {
+            Name = "Golden Fish",
+            Description = "A luxurious treat that greatly reduces hunger",
+            Cost = 40,
+            Hunger = 60,
+            Sleep = 0,
+            Happiness = 50,
+            Rareness = "Rare",
+            Duration = 3
+        },
+        new Item
+        {
+            Name = "Rubber Ball",
+            Description = "A fun toy that improves happiness over time",
+            Cost = 18,
+            Hunger = 0,
+            Sleep = 0,
+            Happiness = 40,
+            Rareness = "Common",
+            Duration = 4
+        },
+        new Item
+        {
+            Name = "Dream Cushion",
+            Description = "Gently improves sleep and happiness",
+            Cost = 25,
+            Hunger = 0,
+            Sleep = 50,
+            Happiness = 30,
+            Rareness = "Rare",
+            Duration = 5
+        },
+        new Item
+        {
+            Name = "Magic Biscuit",
+            Description = "Slightly improves all stats at once",
+            Cost = 35,
+            Hunger = 20,
+            Sleep = 15,
+            Happiness = 15,
+            Rareness = "Epic",
+            Duration = 4
+        },
+        new Item
+        {
+            Name = "Chocolate Bone",
+            Description = "A tasty bone that boosts happiness and hunger",
+            Cost = 30,
+            Hunger = 45,
+            Sleep = 0,
+            Happiness = 50,
+            Rareness = "Rare",
+            Duration = 5
+        },
+        new Item
+        {
+            Name = "Energy Drink",
+            Description = "Boosts sleep and happiness instantly",
+            Cost = 26,
+            Hunger = 0,
+            Sleep = 35,
+            Happiness = 25,
+            Rareness = "Uncommon",
+            Duration = 2
+        },
+        new Item
+        {
+            Name = "Mega Meal",
+            Description = "Fills your pet completely",
+            Cost = 60,
+            Hunger = 100,
+            Sleep = 0,
+            Happiness = 0,
+            Rareness = "Rare",
+            Duration = 5
+        },
+        new Item
+        {
+            Name = "Şıppıdık",
+            Description = "A legendary item that makes the pet unrecognizable with the power of camera lens",
+            Cost = 90,
+            Hunger = 100,
+            Sleep = 100,
+            Happiness = 100,
+            Rareness = "Legendary",
+            Duration = 8
+        }
+
+    };
+}
+
+
+
+
+public static void ShowShop(Player player)
     {
         Console.Clear();
+        Console.WriteLine("Hello")
+        Console.WriteLine($"{AvaliableItems.Count}")
         Console.WriteLine("=== Shop ===");
         for (int i = 0; i < AvailableItems.Count; i++)
         {
